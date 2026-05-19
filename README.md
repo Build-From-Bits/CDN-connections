@@ -35,3 +35,15 @@ const videoUrl = fileService.getVideoStreamUrl('my-video-key');
 // 4. Get a presigned URL for a video
 const presigned = await fileService.getVideoUrl('my-video-key');
 ```
+## Publish
+
+```bash
+npm run pack:check
+npm publish --access public
+```
+
+## License
+
+Licensed under the Apache License 2.0.
+
+Copyright 2026 Build From Bits Pvt Ltd.
