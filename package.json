@@ -1,6 +1,6 @@
 {
-  "name": "@truflect/cdn-connections",
-  "version": "0.1.0",
+  "name": "@build-from-bits/cdn-connections",
+  "version": "1.0.0",
   "description": "Client library for interacting with the Chandrila CDN Server.",
   "type": "module",
   "main": "src/index.js",
@@ -12,12 +12,23 @@
     "README.md"
   ],
   "scripts": {
-    "lint": "echo \"No linter configured\"",
-    "test": "echo \"No tests configured\"",
-    "pack:check": "npm pack --dry-run"
+    "lint": "eslint . --ext .js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "pack:check": "npm pack --dry-run",
+    "publish:npm": "npm publish --access public",
+    "publish:github": "npm publish --registry https://npm.pkg.github.com",
+    "publish:gitlab": "npm publish"
   },
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "axios": "^1.7.9"
+  },
+  "devDependencies": {
+    "eslint": "^9.17.0",
+    "vitest": "^3.0.0"
   }
 }

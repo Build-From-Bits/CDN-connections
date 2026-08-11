@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createCdnSystem } from '../src/index.js';
 import fs from 'fs';
 import path from 'path';

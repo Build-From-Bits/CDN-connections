@@ -12,6 +12,7 @@ export const createCdnSystem = ({
   env = {},
   configOverrides = {},
   axiosOptions = {},
+  headerHook = null,
 } = {}) => {
   const config = buildCdnConfig({
     baseUrl,
@@ -19,8 +20,8 @@ export const createCdnSystem = ({
     overrides: configOverrides,
   });
 
-  const cdnClient = createCdnClient({ config, axiosOptions });
-  const fileService = createFileService({ cdnClient });
+  const cdnClient = createCdnClient({ config, axiosOptions, headerHook });
+  const fileService = createFileService({ cdnClient, uploadFieldName: config.uploadFieldName });
 
   return {
     config,

@@ -1,4 +1,4 @@
-export const createFileService = ({ cdnClient }) => {
+export const createFileService = ({ cdnClient, uploadFieldName = 'file_to_upload' }) => {
   return {
     /**
      * Upload a file to the Chandrila CDN server.
@@ -9,7 +9,7 @@ export const createFileService = ({ cdnClient }) => {
      */
     saveFile: async (fileToUpload, bucketName = null, onUploadProgress = null) => {
       const formData = new FormData();
-      formData.append('file_to_upload', fileToUpload);
+      formData.append(uploadFieldName, fileToUpload);
       if (bucketName) {
         formData.append('bucket_name', bucketName);
       }
@@ -32,15 +32,15 @@ export const createFileService = ({ cdnClient }) => {
      */
     getFileUrl: (key, options = {}) => {
       const { h, w, f, q } = options;
-      const params = new URLSearchParams();
-      params.append('key', key);
-      
-      if (h) params.append('h', h);
-      if (w) params.append('w', w);
-      if (f) params.append('f', f);
-      if (q) params.append('q', q);
-      
-      return `${cdnClient.defaults.baseURL}/file/get?${params.toString()}`;
+      const params = [
+        key && `key=${encodeURIComponent(key)}`,
+        h && `h=${encodeURIComponent(h)}`,
+        w && `w=${encodeURIComponent(w)}`,
+        f && `f=${encodeURIComponent(f)}`,
+        q && `q=${encodeURIComponent(q)}`,
+      ].filter(Boolean).join('&');
+
+      return `${cdnClient.defaults.baseURL}/file/get?${params}`;
     },
 
     /**

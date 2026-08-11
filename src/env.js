@@ -5,10 +5,11 @@ export const buildCdnConfig = ({
 } = {}) => {
   // Support Vite or Create React App environment variables, or standard ones
   const defaultBaseUrl = env.VITE_CDN_BASE_URL || env.REACT_APP_CDN_BASE_URL || env.CDN_BASE_URL || baseUrl || '';
-  
+
   return {
     baseUrl: defaultBaseUrl,
     apiPrefix: '/api',
+    uploadFieldName: 'file_to_upload',
     ...overrides,
   };
 };
